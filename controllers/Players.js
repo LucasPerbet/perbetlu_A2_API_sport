@@ -46,7 +46,7 @@ module.exports.deletePlayer = function deletePlayer (req, res, next, id) {
     });
 };
 
-// GET ID
+// GET ID avec liens HATEOAS
 module.exports.getPlayerById = function getPlayerById (req, res, next, id) {
   if (!id) {
     return utils.writeJson(res, { message: "ID du joueur est requis" }, 400);
@@ -57,6 +57,16 @@ module.exports.getPlayerById = function getPlayerById (req, res, next, id) {
       if (!response) {
         return utils.writeJson(res, { message: "Joueur non trouvé" }, 404);
       }
+
+      // Ajouter des liens HATEOAS à la réponse
+      response._links = {
+        "self": { "href": `/players/${response.id}` },
+        "update": { "href": `/players/${response.id}` },
+        "delete": { "href": `/players/${response.id}` },
+        "team": { "href": `/teams/${response.teamId}` }
+      };
+
+      // Retourner la réponse enrichie avec les liens
       utils.writeJson(res, response, 200);
     })
     .catch(function (error) {
@@ -64,13 +74,26 @@ module.exports.getPlayerById = function getPlayerById (req, res, next, id) {
     });
 };
 
-// GET
+
+// GET avec liens HATEOAS
 module.exports.getPlayers = function getPlayers (req, res, next) {
   Players.getPlayers()
     .then(function (response) {
       if (response.length === 0) {
         return utils.writeJson(res, { message: "Aucun joueur trouvé" }, 404);
       }
+
+      // Ajouter des liens HATEOAS à chaque joueur
+      response.forEach(player => {
+        player._links = {
+          "self": { "href": `/players/${player.id}` },
+          "update": { "href": `/players/${player.id}` },
+          "delete": { "href": `/players/${player.id}` },
+          "team": { "href": `/teams/${player.teamId}` }
+        };
+      });
+
+      // Retourner la réponse enrichie avec les liens
       utils.writeJson(res, response, 200);
     })
     .catch(function (error) {
