@@ -15,8 +15,8 @@ Ce projet est un système de gestion des joueurs, des équipes, des compétition
 
 1. **Cloner le projet** :
    ```bash
-   git clone <URL_DU_REPOSITORY>
-   cd <répertoire_du_projet>
+   git clone https://github.com/LucasPerbet/perbetlu_A2_API_sport
+   cd perbetlu_A2_API_sport
    ```
 
 2. **Installer les dépendances** :
@@ -202,5 +202,18 @@ Ensuite, nous avons modifié les méthodes générées pour les adapter aux fonc
 --- 
 
 ### 3. Suivi de l'implémentation du frontend
+Afin de tester les différents endpoints de l'API directement dans un frontend, l'outil Swagger-ui est disponible sur http://localhost:8080/docs . L'ensemble de la spécification s'y trouve et il est possible d'y tester les endpoints directement. Cela affichera bien les données présentes dans les fichiers de données JSON.
+
+--- 
+
+## **Contribuer**
+- Contributions et suggestions sont les bienvenues.
+- Ouvrez une issue ou soumettez une pull request sur le dépôt Git.
+
+---
+
+## **Auteur**
+Projet conçu et configuré pour le déploiement Docker par Lucas Perbet pour un projet de BUT3A. Contact : lucas.perbet@etu.univ-grenoble-alpes.fr
+
 
 
