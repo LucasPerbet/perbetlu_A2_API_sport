@@ -1,0 +1,93 @@
+[
+    {
+      "id": 1,
+      "name": "Équipe A",
+      "players": [
+        {
+          "id": 1,
+          "name": "John Doe",
+          "age": 25,
+          "teamId": 1
+        },
+        {
+          "id": 2,
+          "name": "Jane Smith",
+          "age": 22,
+          "teamId": 1
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Équipe B",
+      "players": [
+        {
+          "id": 3,
+          "name": "Michael Johnson",
+          "age": 28,
+          "teamId": 2
+        },
+        {
+          "id": 4,
+          "name": "Emily Davis",
+          "age": 24,
+          "teamId": 2
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Équipe C",
+      "players": [
+        {
+          "id": 5,
+          "name": "David Wilson",
+          "age": 30,
+          "teamId": 3
+        },
+        {
+          "id": 6,
+          "name": "Olivia Brown",
+          "age": 23,
+          "teamId": 3
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Équipe D",
+      "players": [
+        {
+          "id": 7,
+          "name": "James Miller",
+          "age": 27,
+          "teamId": 4
+        },
+        {
+          "id": 8,
+          "name": "Sophia Garcia",
+          "age": 21,
+          "teamId": 4
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Équipe E",
+      "players": [
+        {
+          "id": 9,
+          "name": "William Martinez",
+          "age": 29,
+          "teamId": 5
+        },
+        {
+          "id": 10,
+          "name": "Isabella Rodriguez",
+          "age": 26,
+          "teamId": 5
+        }
+      ]
+    }
+  ]
+  

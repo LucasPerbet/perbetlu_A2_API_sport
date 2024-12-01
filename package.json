@@ -1,0 +1,21 @@
+{
+  "name": "api-de-gestion-de-sport-collectif",
+  "version": "1.0.0",
+  "description": "API permettant de gérer les équipes, joueurs, compétitions et matchs d'un système de sport collectif.",
+  "main": "index.js",
+  "scripts": {
+    "prestart": "npm install",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "swagger"
+  ],
+  "license": "Unlicense",
+  "private": true,
+  "dependencies": {
+    "connect": "^3.2.0",
+    "cors": "^2.8.5",
+    "js-yaml": "^3.3.0",
+    "oas3-tools": "^2.2.3"
+  }
+}

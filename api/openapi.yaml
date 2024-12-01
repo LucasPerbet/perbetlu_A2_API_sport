@@ -1,0 +1,261 @@
+openapi: 3.0.2
+info:
+  title: API de Gestion de Sport Collectif
+  description: "API permettant de gérer les équipes, joueurs, compétitions et matchs\
+    \ d'un système de sport collectif."
+  contact:
+    name: Lucas Perbet
+    email: lucas.perbet@etu.univ-grenoble-alpes.fr
+  version: 1.0.0
+servers:
+- url: http://localhost:8080/
+- url: https://localhost:8080/
+paths:
+  /players:
+    get:
+      tags:
+      - players
+      summary: Récupérer la liste des joueurs
+      operationId: getPlayers
+      responses:
+        "200":
+          description: Liste des joueurs récupérée avec succès
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Player'
+                x-content-type: application/json
+        "400":
+          description: Erreur de requête
+      x-swagger-router-controller: Players
+    post:
+      tags:
+      - players
+      summary: Ajouter un nouveau joueur
+      operationId: addPlayer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Player'
+      responses:
+        "200":
+          description: Le joueur a été ajouté avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+          links:
+            playerDetail:
+              operationId: getPlayerById
+              parameters:
+                id: $response.body.id
+        "400":
+          description: Syntaxe de la requête incorrecte
+      x-swagger-router-controller: Players
+  /players/{id}:
+    get:
+      tags:
+      - players
+      summary: Récupérer un joueur par son ID
+      operationId: getPlayerById
+      parameters:
+      - name: id
+        in: path
+        description: L'ID du joueur à récupérer
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Détails du joueur récupérés avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+        "404":
+          description: Joueur non trouvé
+      x-swagger-router-controller: Players
+    put:
+      tags:
+      - players
+      summary: Mettre à jour un joueur
+      operationId: updatePlayer
+      parameters:
+      - name: id
+        in: path
+        description: L'ID du joueur à mettre à jour
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Player'
+      responses:
+        "200":
+          description: Le joueur a été mis à jour avec succès
+        "404":
+          description: Le joueur avec cet ID n'a pas été trouvé
+      x-swagger-router-controller: Players
+    delete:
+      tags:
+      - players
+      summary: Supprimer un joueur
+      operationId: deletePlayer
+      parameters:
+      - name: id
+        in: path
+        description: L'ID du joueur à supprimer
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Le joueur a été supprimé avec succès
+        "404":
+          description: Le joueur avec cet ID n'a pas été trouvé
+      x-swagger-router-controller: Players
+  /teams:
+    get:
+      tags:
+      - teams
+      summary: Récupérer la liste des équipes
+      operationId: getTeams
+      responses:
+        "200":
+          description: Liste des équipes récupérée avec succès
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Team'
+                x-content-type: application/json
+        "400":
+          description: Erreur de requête
+      x-swagger-router-controller: Teams
+  /competitions:
+    get:
+      tags:
+      - competitions
+      summary: Récupérer la liste des compétitions
+      operationId: getCompetitions
+      responses:
+        "200":
+          description: Liste des compétitions récupérée avec succès
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Competition'
+                x-content-type: application/json
+        "400":
+          description: Erreur de requête
+      x-swagger-router-controller: Competitions
+  /matches:
+    get:
+      tags:
+      - matches
+      summary: Récupérer la liste des matchs
+      operationId: getMatches
+      responses:
+        "200":
+          description: Liste des matchs récupérée avec succès
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Match'
+                x-content-type: application/json
+        "400":
+          description: Erreur de requête
+      x-swagger-router-controller: Matches
+components:
+  schemas:
+    Player:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        age:
+          type: integer
+        teamId:
+          type: integer
+      example:
+        id: 1
+        name: John Doe
+        age: 25
+        teamId: 1
+    Team:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        players:
+          type: array
+          items:
+            $ref: '#/components/schemas/Player'
+      example:
+        id: 1
+        name: Équipe A
+        players:
+        - id: 1
+          name: John Doe
+          age: 25
+          teamId: 1
+    Competition:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        date:
+          type: string
+        teams:
+          type: array
+          items:
+            $ref: '#/components/schemas/Team'
+      example:
+        id: 1
+        name: Coupe du Monde 2024
+        date: 2024-06-01
+        teams:
+        - id: 1
+          name: Équipe A
+          players: []
+    Match:
+      type: object
+      properties:
+        id:
+          type: integer
+        competitionId:
+          type: integer
+        team1Id:
+          type: integer
+        team2Id:
+          type: integer
+        score:
+          type: string
+      example:
+        id: 1
+        competitionId: 1
+        team1Id: 1
+        team2Id: 2
+        score: 2-1
